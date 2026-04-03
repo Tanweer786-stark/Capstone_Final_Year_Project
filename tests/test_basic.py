@@ -57,7 +57,7 @@ def test_groq_ai_graceful_degradation():
 def test_database_connection():
     """Test database connection (without actual operations)"""
     try:
-        from database.db import get_db_connection
+        from database.db import get_connection
 
         # Just test that we can import and call the function
         # (won't actually connect in CI environment)
