@@ -53,14 +53,14 @@ This application helps users track expenses, plan budgets, monitor EMIs, and get
 
 ## ⚙️ Installation & Setup
 
-### 1 Clone the repository
+###  Clone the repository
 
 ```bash
 git clone https://github.com/your-username/ai-financial-advisor.git
 cd ai-financial-advisor
 ```
 
-### 2 Create Virtual Environemnt and Activate it on windows/Macos/Linux
+###  Create Virtual Environemnt and Activate it on windows/Macos/Linux
 ```bash
 python -m venv venv
 source venv/bin/activate   # Mac/Linux
@@ -70,6 +70,11 @@ venv\Scripts\activate      # Windows
 ## Install The Requirements 
 ```bash
 pip install -r requirements.txt
+
+```
+## Setup environment variables
+```bash
+API_KEY=your_api_key_here
 ```
 
 ## Run the App
