@@ -1,6 +1,13 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
+
+try:
+    import matplotlib.pyplot as plt
+    MATPLOTLIB_AVAILABLE = True
+except ModuleNotFoundError:
+    plt = None
+    MATPLOTLIB_AVAILABLE = False
+
 from database.db import get_expenses, get_budgets, get_emis
 from utils.helpers import convert_expenses_to_df, convert_budgets_to_df, convert_emis_to_df
 from utils.auth import is_logged_in
@@ -60,17 +67,21 @@ else:
 st.subheader("📌 Category-wise Spending")
 category_spend = df_exp.groupby("Category")["Amount"].sum()
 
-fig1, ax1 = plt.subplots()
-category_spend.plot(kind="bar", ax=ax1)
-st.pyplot(fig1)
+if MATPLOTLIB_AVAILABLE:
+    fig1, ax1 = plt.subplots()
+    category_spend.plot(kind="bar", ax=ax1)
+    st.pyplot(fig1)
+else:
+    st.warning("matplotlib is unavailable; chart display is disabled. Install matplotlib in requirements.txt to enable it.")
 
 # Fixed vs Variable analysis
 st.subheader("📌 Fixed vs Variable Expense Analysis")
 type_spend = df_exp.groupby("Type")["Amount"].sum()
 
-fig2, ax2 = plt.subplots()
-type_spend.plot(kind="pie", autopct="%1.1f%%", ax=ax2)
-st.pyplot(fig2)
+if MATPLOTLIB_AVAILABLE:
+    fig2, ax2 = plt.subplots()
+    type_spend.plot(kind="pie", autopct="%1.1f%%", ax=ax2)
+    st.pyplot(fig2)
 
 # Monthly Trend Graph
 st.subheader("📆 Monthly Trend Report")
@@ -80,11 +91,14 @@ df_exp["Month"] = df_exp["Date"].dt.to_period("M").astype(str)
 
 monthly_trend = df_exp.groupby("Month")["Amount"].sum()
 
-fig3, ax3 = plt.subplots()
-monthly_trend.plot(kind="line", marker="o", ax=ax3)
-ax3.set_xlabel("Month")
-ax3.set_ylabel("Spending (₹)")
-st.pyplot(fig3)
+if MATPLOTLIB_AVAILABLE:
+    fig3, ax3 = plt.subplots()
+    monthly_trend.plot(kind="line", marker="o", ax=ax3)
+    ax3.set_xlabel("Month")
+    ax3.set_ylabel("Spending (₹)")
+    st.pyplot(fig3)
+else:
+    st.info("Monthly trend chart unavailable because matplotlib is not installed.")
 
 # Download Report
 st.subheader("📥 Download Expense Report")
