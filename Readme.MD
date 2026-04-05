@@ -187,7 +187,10 @@ streamlit run app.py
 - Ayan Ahmad
 - Saurabh Yadav
 
-
+## Contributors
+- Tanveer Iqbal  
+  Contributed to the development of the Expense Tracker module, including adding and managing daily expenses with details like date, category, type, and amount.  
+  Also assisted in project documentation, report writing, system integration, and preparation of the final project presentation.
 
 
 
